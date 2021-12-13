@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import React from 'react';
-import { Card, CardImg, CardSubtitle, CardTitle, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Card, CardImg, CardSubtitle, CardTitle, Form, FormGroup, Input, Label, Button, CardBody } from 'reactstrap';
 
-const IncompleteCard = ({todoText, toggle, todoDone, todoId}) => {
-  const onToggle = () => { toggle(todoId) }
-
+const IncompleteCard = ({ order, title, done, id, time, removeTodo, toggle}) => {
+  // const onToggle = () => { toggle(todoId) }
+  console.log(done);
   return (
    <Card style={{
      maxWidth:"28%",
@@ -14,18 +14,21 @@ const IncompleteCard = ({todoText, toggle, todoDone, todoId}) => {
      margin:"4px 0",
      borderRadius:"6px"}}>
      <CardImg src="https://picsum.photos/318/180" alt="Todo img"/>
-     <Form style={{marginTop:"14px"}}>
+     <CardBody>
+     <Form>
      <FormGroup check inline >
-     <Input type="checkbox" onClick ={onToggle} checked={todoDone} readOnly/>
+     <Input type="checkbox" checked={done} onClick={()=>toggle(id,title,done,order)} readOnly/>
      <Label className="text-secondary" style={{fontSize:".85rem" ,marginBottom:"0"}}>수행완료</Label>
      </FormGroup>
      </Form>
      <CardTitle style={{fontSize:"1.2rem"}}>
-      {todoText}
+      {title}
      </CardTitle>
-     <CardSubtitle className="text-primary" style={{fontSize:"12px",fontSize:".5rem"}}>
-      {dayjs().format("YYYY-MM-DD H:mm:ss")}
+     <CardSubtitle className="text-primary" style={{fontSize:".5rem"}}>
+      {dayjs(time).format("YYYY-MM-DD HH:mm:ss")}
      </CardSubtitle>
+     <Button onClick={()=>removeTodo(id)} size='sm' style={{marginTop:"10px"}}>삭제</Button>
+     </CardBody>
    </Card>
   );
 };

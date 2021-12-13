@@ -1,13 +1,13 @@
 import { Button, Col, Form, FormGroup, Input ,Label } from 'reactstrap';
 
-const TodoInsert = ({input, changeInput, insert}) => {
+const TodoInsert = ({ input, todo, getTodos, putTodo, changeInput}) => {
   const onChange = e => {changeInput(e.target.value)}
   const onSubmit = (e) => {
     e.preventDefault()
-    insert(input)
+    putTodo(input)
+    console.log("투두", todo);
     changeInput('')
   }
-
   return (
     <Form onSubmit={onSubmit} style={{marginTop:"40px"}}>
     <FormGroup row>
